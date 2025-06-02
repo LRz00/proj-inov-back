@@ -1,4 +1,4 @@
-package com.ifba.proj_inov.Paciente.infrastructure.mapper;
+package com.ifba.proj_inov.api.infrastructure.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;

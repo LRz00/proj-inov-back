@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/proj_inov_back
-    username: postgres
-    password: 1995
+    username: seu_banco
+    password: sua_senha
     driver-class-name: org.postgresql.Driver
 
   jpa:

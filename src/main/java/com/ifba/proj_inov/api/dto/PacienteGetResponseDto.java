@@ -1,4 +1,4 @@
-package com.ifba.proj_inov.Paciente.dto;
+package com.ifba.proj_inov.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

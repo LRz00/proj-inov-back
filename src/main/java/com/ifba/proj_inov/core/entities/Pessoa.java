@@ -1,7 +1,7 @@
-package com.ifba.proj_inov.Pessoa.entity;
+package com.ifba.proj_inov.core.entities;
 
 
-import com.ifba.proj_inov.Paciente.infrastructure.entity.PersistenceEntity;
+import com.ifba.proj_inov.api.infrastructure.entity.PersistenceEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;

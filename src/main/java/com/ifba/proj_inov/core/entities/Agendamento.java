@@ -1,6 +1,5 @@
 package com.ifba.proj_inov.core.entities;
 
-import com.ifba.proj_inov.Paciente.entity.Paciente;
 import com.ifba.proj_inov.core.entities.enums.StatusAgendamento;
 import jakarta.persistence.*;
 import lombok.*;

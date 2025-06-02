@@ -1,10 +1,10 @@
-package com.ifba.proj_inov.Paciente.controller;
+package com.ifba.proj_inov.api.controller;
 
-import com.ifba.proj_inov.Paciente.dto.PacienteGetResponseDto;
-import com.ifba.proj_inov.Paciente.dto.PacientePostResquestDto;
-import com.ifba.proj_inov.Paciente.entity.Paciente;
-import com.ifba.proj_inov.Paciente.service.PacienteService;
-import com.ifba.proj_inov.Paciente.infrastructure.mapper.ObjectMapperUtil;
+import com.ifba.proj_inov.api.dto.PacienteGetResponseDto;
+import com.ifba.proj_inov.api.dto.PacientePostResquestDto;
+import com.ifba.proj_inov.core.entities.Paciente;
+import com.ifba.proj_inov.core.service.PacienteService;
+import com.ifba.proj_inov.api.infrastructure.mapper.ObjectMapperUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

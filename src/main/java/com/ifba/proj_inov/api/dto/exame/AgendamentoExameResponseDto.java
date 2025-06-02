@@ -1,6 +1,6 @@
 package com.ifba.proj_inov.api.dto.exame;
 
-import com.ifba.proj_inov.Paciente.dto.PacienteGetResponseDto;
+import com.ifba.proj_inov.api.dto.PacienteGetResponseDto;
 import com.ifba.proj_inov.core.entities.enums.StatusAgendamento;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

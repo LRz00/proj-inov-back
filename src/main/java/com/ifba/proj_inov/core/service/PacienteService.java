@@ -1,7 +1,7 @@
-package com.ifba.proj_inov.Paciente.service;
+package com.ifba.proj_inov.core.service;
 
-import com.ifba.proj_inov.Paciente.entity.Paciente;
-import com.ifba.proj_inov.Paciente.repository.PacienteRepository;
+import com.ifba.proj_inov.core.entities.Paciente;
+import com.ifba.proj_inov.core.repository.PacienteRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

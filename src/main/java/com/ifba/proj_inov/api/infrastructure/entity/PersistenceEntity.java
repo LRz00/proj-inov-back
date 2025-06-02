@@ -1,4 +1,4 @@
-package com.ifba.proj_inov.Paciente.infrastructure.entity;
+package com.ifba.proj_inov.api.infrastructure.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

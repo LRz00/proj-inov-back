@@ -1,6 +1,5 @@
-package com.ifba.proj_inov.Paciente.entity;
+package com.ifba.proj_inov.core.entities;
 
-import com.ifba.proj_inov.Pessoa.entity.Pessoa;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

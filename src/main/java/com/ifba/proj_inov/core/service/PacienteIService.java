@@ -1,6 +1,6 @@
-package com.ifba.proj_inov.Paciente.service;
+package com.ifba.proj_inov.core.service;
 
-import com.ifba.proj_inov.Paciente.entity.Paciente;
+import com.ifba.proj_inov.core.entities.Paciente;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

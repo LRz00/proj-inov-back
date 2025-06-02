@@ -1,9 +1,8 @@
 package com.ifba.proj_inov.core.service;
 
-import com.ifba.proj_inov.Paciente.dto.PacienteGetResponseDto;
-import com.ifba.proj_inov.Paciente.entity.Paciente;
-import com.ifba.proj_inov.Paciente.infrastructure.mapper.ObjectMapperUtil;
-import com.ifba.proj_inov.Paciente.service.PacienteService;
+import com.ifba.proj_inov.api.dto.PacienteGetResponseDto;
+import com.ifba.proj_inov.core.entities.Paciente;
+import com.ifba.proj_inov.api.infrastructure.mapper.ObjectMapperUtil;
 import com.ifba.proj_inov.api.dto.exame.AgendamentoExameRequestDto;
 import com.ifba.proj_inov.api.dto.exame.AgendamentoExameResponseDto;
 import com.ifba.proj_inov.api.dto.exame.ExameDto;

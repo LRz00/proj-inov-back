@@ -1,6 +1,6 @@
 package com.ifba.proj_inov.core.service;
 
-import com.ifba.proj_inov.Paciente.infrastructure.mapper.ObjectMapperUtil;
+import com.ifba.proj_inov.api.infrastructure.mapper.ObjectMapperUtil;
 import com.ifba.proj_inov.api.dto.exame.ExameDto;
 import com.ifba.proj_inov.core.entities.Exame;
 import com.ifba.proj_inov.core.repository.ExameRepository;

@@ -1,6 +1,6 @@
-package com.ifba.proj_inov.Paciente.repository;
+package com.ifba.proj_inov.core.repository;
 
-import com.ifba.proj_inov.Paciente.entity.Paciente;
+import com.ifba.proj_inov.core.entities.Paciente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
