@@ -41,37 +41,37 @@ public class PacienteController {
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
-        // Método para buscar um paciente pelo ID
-        @GetMapping("/paciente/{id}")
-        public ResponseEntity<PacienteGetResponseDto> findById(@PathVariable Long id) {
-            Paciente paciente = pacienteService.findById(id);
-            PacienteGetResponseDto responseDto = objectMapperUtil.map(paciente, PacienteGetResponseDto.class);
-            return ResponseEntity.ok(responseDto);
-        }
+    // Método para buscar um paciente pelo ID
+    @GetMapping("/paciente/{id}")
+    public ResponseEntity<PacienteGetResponseDto> findById(@PathVariable Long id) {
+        Paciente paciente = pacienteService.findById(id);
+        PacienteGetResponseDto responseDto = objectMapperUtil.map(paciente, PacienteGetResponseDto.class);
+        return ResponseEntity.ok(responseDto);
+    }
 
-        // Método para salvar um novo Paciente
-        @PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-        public ResponseEntity<PacienteGetResponseDto> save(@RequestBody @Valid PacientePostResquestDto pacientePostRequestDto) {
-            Paciente Paciente = objectMapperUtil.map(pacientePostRequestDto, Paciente.class);
-            Paciente savePaciente = pacienteService.save(Paciente);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(objectMapperUtil.map(savePaciente, PacienteGetResponseDto.class));
-        }
+    // Método para salvar um novo Paciente
+    @PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PacienteGetResponseDto> save(@RequestBody @Valid PacientePostResquestDto pacientePostRequestDto) {
+        Paciente Paciente = objectMapperUtil.map(pacientePostRequestDto, Paciente.class);
+        Paciente savePaciente = pacienteService.save(Paciente);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(objectMapperUtil.map(savePaciente, PacienteGetResponseDto.class));
+    }
 
-        // Método para atualizar um Paciente existente
-        @PutMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
-        public ResponseEntity<Void> update(@RequestBody @Valid PacientePostResquestDto pacientePostRequestDto) {
-            Paciente paciente = objectMapperUtil.map(pacientePostRequestDto, Paciente.class);
-            pacienteService.update(paciente);
-            return ResponseEntity.noContent().build();
-        }
+    // Método para atualizar um Paciente existente
+    @PutMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> update(@RequestBody @Valid PacientePostResquestDto pacientePostRequestDto) {
+        Paciente paciente = objectMapperUtil.map(pacientePostRequestDto, Paciente.class);
+        pacienteService.update(paciente);
+        return ResponseEntity.noContent().build();
+    }
 
-        // Método para excluir um Paciente pelo ID
-        @DeleteMapping(path = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-        public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(pacienteService.delete(id));
-        }
+    // Método para excluir um Paciente pelo ID
+    @DeleteMapping(path = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(pacienteService.delete(id));
+    }
 
 
 }

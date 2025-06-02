@@ -3,14 +3,14 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/nome_do_banco
-    username: seu_usuario
-    password: sua_senha
+    url: jdbc:postgresql://localhost:5432/proj_inov_back
+    username: postgres
+    password: 1995
     driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update  
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
