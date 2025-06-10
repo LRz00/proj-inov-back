@@ -6,7 +6,6 @@ import com.ifba.proj_inov.core.entities.Paciente;
 import com.ifba.proj_inov.core.service.PacienteService;
 import com.ifba.proj_inov.api.infrastructure.mapper.ObjectMapperUtil;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -19,11 +18,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/paciente")
 @CrossOrigin("*")
-@RequiredArgsConstructor
 public class PacienteController {
 
     private final PacienteService pacienteService;
     private final ObjectMapperUtil objectMapperUtil;
+
+    public PacienteController(PacienteService pacienteService, ObjectMapperUtil objectMapperUtil) {
+        this.pacienteService = pacienteService;
+        this.objectMapperUtil = objectMapperUtil;
+    }
 
     // Método para buscar todos os pacientes com paginação
     @GetMapping(path = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)

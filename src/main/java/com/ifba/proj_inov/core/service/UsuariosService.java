@@ -65,10 +65,7 @@ public class UsuariosService implements UserDetailsService {
 
         usuario.setPassword(this.passwordEncoder.encode(usuario.getPassword()));
 
-        Usuarios usuarioEntidade = this.usuariosRepository.save(usuario);
-
-
-        return usuarioEntidade;
+        return this.usuariosRepository.save(usuario);
     }
 
     @Transactional(readOnly = true)

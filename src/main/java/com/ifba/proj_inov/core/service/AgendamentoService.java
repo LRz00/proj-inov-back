@@ -11,7 +11,6 @@ import com.ifba.proj_inov.core.entities.Exame;
 import com.ifba.proj_inov.core.entities.enums.StatusAgendamento;
 import com.ifba.proj_inov.core.repository.AgendamentoRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,27 +18,33 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class AgendamentoService {
     private final AgendamentoRepository agendamentoRepository;
     private final PacienteService pacienteService;
     private final ExameService exameService;
     private final ObjectMapperUtil objectMapperUtil;
 
+    public AgendamentoService(AgendamentoRepository agendamentoRepository, PacienteService pacienteService, ExameService exameService, ObjectMapperUtil objectMapperUtil) {
+        this.agendamentoRepository = agendamentoRepository;
+        this.pacienteService = pacienteService;
+        this.exameService = exameService;
+        this.objectMapperUtil = objectMapperUtil;
+    }
+
     @Transactional
     public AgendamentoExameResponseDto agendarExame(AgendamentoExameRequestDto requestDto) {
         Paciente paciente = pacienteService.findById(requestDto.getPacienteId());
         Exame exame = exameService.findById(requestDto.getExameId());
 
-        Agendamento agendamento = Agendamento.builder()
-                .paciente(paciente)
-                .exame(exame)
-                .dataHora(requestDto.getDataHora())
-                .localColeta(requestDto.getLocalColeta())
-                .observacoes(requestDto.getObservacoes())
-                .status(StatusAgendamento.AGENDADO)
-                .dataCriacao(LocalDateTime.now())
-                .build();
+        Agendamento agendamento = new Agendamento(
+                paciente,
+                exame,
+                requestDto.getDataHora(),
+                requestDto.getLocalColeta(),
+                requestDto.getObservacoes(),
+                StatusAgendamento.AGENDADO,
+                LocalDateTime.now()
+        );
 
         agendamento = agendamentoRepository.save(agendamento);
         return convertToDto(agendamento);

@@ -4,14 +4,17 @@ import com.ifba.proj_inov.api.infrastructure.mapper.ObjectMapperUtil;
 import com.ifba.proj_inov.api.dto.exame.ExameDto;
 import com.ifba.proj_inov.core.entities.Exame;
 import com.ifba.proj_inov.core.repository.ExameRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class ExameService {
     private final ExameRepository exameRepository;
     private final ObjectMapperUtil objectMapperUtil;
+
+    public ExameService(ExameRepository exameRepository, ObjectMapperUtil objectMapperUtil) {
+        this.exameRepository = exameRepository;
+        this.objectMapperUtil = objectMapperUtil;
+    }
 
     public ExameDto save(ExameDto exameDto) {
         Exame exame = objectMapperUtil.map(exameDto, Exame.class);

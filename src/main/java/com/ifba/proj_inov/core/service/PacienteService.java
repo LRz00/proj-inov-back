@@ -3,7 +3,6 @@ package com.ifba.proj_inov.core.service;
 import com.ifba.proj_inov.core.entities.Paciente;
 import com.ifba.proj_inov.core.repository.PacienteRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,10 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class PacienteService implements PacienteIService {
 
     private final PacienteRepository pacienteRepository;
+
+    public PacienteService(PacienteRepository pacienteRepository) {
+        this.pacienteRepository = pacienteRepository;
+    }
 
     // Método para buscar todos os Pacientes com suporte à paginação
     @Override
