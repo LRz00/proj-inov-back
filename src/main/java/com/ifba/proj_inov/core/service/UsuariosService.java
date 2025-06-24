@@ -25,9 +25,13 @@ public class UsuariosService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public Usuario salvar(Usuario usuario) {
-        Optional<Usuario> usuariosOptional = this.usuariosRepository.findByEmail(usuario.getEmail());
-        if (usuariosOptional.isPresent()) {
+        Optional<Usuario> usuariosOptionalEmail = this.usuariosRepository.findByEmail(usuario.getEmail());
+        Optional<Usuario> usuariosOptionalCpf = this.usuariosRepository.findByCpf(usuario.getCpf());
+        if (usuariosOptionalEmail.isPresent()) {
             throw new RuntimeException("Email já está em uso");
+        }
+        if (usuariosOptionalCpf.isPresent()) {
+            throw new RuntimeException("CPF já está em uso");
         }
         if (usuario.getCpf().isBlank() || usuario.getEmail().isBlank() || usuario.getSenha().isBlank()) {
             throw new RuntimeException("Informação inválida");

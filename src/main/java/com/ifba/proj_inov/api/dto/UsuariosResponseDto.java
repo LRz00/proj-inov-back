@@ -7,7 +7,7 @@ public class UsuariosResponseDto {
     public UsuariosResponseDto() {
     }
 
-    public UsuariosResponseDto(Long id, String nome, String cpf, String email, String senha, UsuarioEnum perfil) {
+    public UsuariosResponseDto(Long id, String nome, String cpf, String email, String senha, String perfil) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -21,7 +21,7 @@ public class UsuariosResponseDto {
     private String cpf;
     private String email;
     private String senha;
-    private UsuarioEnum perfil;
+    private String perfil;
 
     public Long getId() {
         return id;
@@ -63,11 +63,11 @@ public class UsuariosResponseDto {
         this.senha = senha;
     }
 
-    public UsuarioEnum getPerfil() {
+    public String getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(UsuarioEnum perfil) {
+    public void setPerfil(String perfil) {
         this.perfil = perfil;
     }
 }
