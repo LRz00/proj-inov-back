@@ -2,12 +2,10 @@ package com.ifba.proj_inov.api.dto;
 
 import com.ifba.proj_inov.core.entitites.Usuario;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-public class SolicitacoesCreateDto {
+public class SolicitacaoManViaPublicaCreateDto {
 
     @NotBlank
     private String descricao;
@@ -17,21 +15,29 @@ public class SolicitacoesCreateDto {
 
     private SolicitacaoStatusEnum status;
 
-    @NotBlank
+    @NotNull
     private Usuario solicitante;
 
     @NotBlank
     private String comentarios;
 
-    public SolicitacoesCreateDto() {
+    @NotBlank
+    private String bairro;
+
+    @NotBlank
+    private String nomeRua;
+
+    public SolicitacaoManViaPublicaCreateDto() {
     }
 
-    public SolicitacoesCreateDto(String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios) {
+    public SolicitacaoManViaPublicaCreateDto(String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, String bairro, String nomeRua) {
         this.descricao = descricao;
         this.dataCriada = dataCriada;
         this.status = status;
         this.solicitante = solicitante;
         this.comentarios = comentarios;
+        this.bairro = bairro;
+        this.nomeRua = nomeRua;
     }
 
     public String getDescricao() {
@@ -72,5 +78,21 @@ public class SolicitacoesCreateDto {
 
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getNomeRua() {
+        return nomeRua;
+    }
+
+    public void setNomeRua(String nomeRua) {
+        this.nomeRua = nomeRua;
     }
 }

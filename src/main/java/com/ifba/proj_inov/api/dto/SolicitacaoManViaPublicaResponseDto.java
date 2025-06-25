@@ -3,7 +3,7 @@ package com.ifba.proj_inov.api.dto;
 import com.ifba.proj_inov.core.entitites.Usuario;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 
-public class SolicitacoesResponseDto {
+public class SolicitacaoManViaPublicaResponseDto {
 
     private Long id;
     private String descricao;
@@ -11,11 +11,13 @@ public class SolicitacoesResponseDto {
     private SolicitacaoStatusEnum status;
     private Usuario solicitante;
     private String comentarios;
+    private String bairro;
+    private String nomeRua;
 
-    public SolicitacoesResponseDto() {
+    public SolicitacaoManViaPublicaResponseDto() {
     }
 
-    public SolicitacoesResponseDto(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios) {
+    public SolicitacaoManViaPublicaResponseDto(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios) {
         this.id = id;
         this.descricao = descricao;
         this.dataCriada = dataCriada;
@@ -70,5 +72,21 @@ public class SolicitacoesResponseDto {
 
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getNomeRua() {
+        return nomeRua;
+    }
+
+    public void setNomeRua(String nomeRua) {
+        this.nomeRua = nomeRua;
     }
 }
