@@ -5,7 +5,7 @@ import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class SolicitacaoManViaPublicaCreateDto {
+public class SolicitacaoManIluminacaoPublicaCreateDto {
 
     @NotBlank
     private String descricao;
@@ -24,10 +24,10 @@ public class SolicitacaoManViaPublicaCreateDto {
     @NotBlank
     private String nomeRua;
 
-    public SolicitacaoManViaPublicaCreateDto() {
+    public SolicitacaoManIluminacaoPublicaCreateDto() {
     }
 
-    public SolicitacaoManViaPublicaCreateDto(String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String bairro, String nomeRua) {
+    public SolicitacaoManIluminacaoPublicaCreateDto(String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String bairro, String nomeRua) {
         this.descricao = descricao;
         this.dataCriada = dataCriada;
         this.status = status;

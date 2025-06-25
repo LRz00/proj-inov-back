@@ -1,13 +1,11 @@
 package com.ifba.proj_inov.core.service;
 
-import com.ifba.proj_inov.api.dto.SolicitacaoManViaPublicaCreateDto;
-import com.ifba.proj_inov.api.dto.SolicitacaoManViaPublicaResponseDto;
-import com.ifba.proj_inov.api.dto.SolicitacaoManViaPublicaUpdateDto;
-import com.ifba.proj_inov.core.entitites.Solicitacao;
-import com.ifba.proj_inov.core.entitites.SolicitacaoManViaPublica;
-import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
-import com.ifba.proj_inov.core.repository.SolicitacaoManViaPublicaRepository;
-import com.ifba.proj_inov.core.repository.projection.SolicitacaoManViaPublicaProjection;
+import com.ifba.proj_inov.api.dto.SolicitacaoManIluminacaoPublicaCreateDto;
+import com.ifba.proj_inov.api.dto.SolicitacaoManIluminacaoPublicaResponseDto;
+import com.ifba.proj_inov.api.dto.SolicitacaoManIluminacaoPublicaUpdateDto;
+import com.ifba.proj_inov.core.entitites.SolicitacaoManIluminacaoPublica;
+import com.ifba.proj_inov.core.repository.SolicitacaoManIluminacaoPublicaRepository;
+import com.ifba.proj_inov.core.repository.projection.SolicitacaoManIluminacaoPublicaProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,18 +14,18 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class SolicitacaoManViaPublicaService {
+public class SolicitacaoManIluminacaoPublicaService {
 
-    private final SolicitacaoManViaPublicaRepository repository;
+    private final SolicitacaoManIluminacaoPublicaRepository repository;
 
     @Autowired
-    public SolicitacaoManViaPublicaService(SolicitacaoManViaPublicaRepository repository) {
+    public SolicitacaoManIluminacaoPublicaService(SolicitacaoManIluminacaoPublicaRepository repository) {
         this.repository = repository;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public SolicitacaoManViaPublicaResponseDto salvar(SolicitacaoManViaPublicaCreateDto createDto) {
-        SolicitacaoManViaPublica entity = new SolicitacaoManViaPublica();
+    public SolicitacaoManIluminacaoPublicaResponseDto salvar(SolicitacaoManIluminacaoPublicaCreateDto createDto) {
+        SolicitacaoManIluminacaoPublica entity = new SolicitacaoManIluminacaoPublica();
         entity.setDescricao(createDto.getDescricao());
         entity.setDataCriada(createDto.getDataCriada());
         entity.setStatus(createDto.getStatus());
@@ -36,30 +34,30 @@ public class SolicitacaoManViaPublicaService {
         entity.setNomeRua(createDto.getNomeRua());
         entity = this.repository.save(entity);
 
-        SolicitacaoManViaPublicaResponseDto responseDto = getSolicitacaoManViaPublicaResponseDto(entity);
+        SolicitacaoManIluminacaoPublicaResponseDto responseDto = getSolicitacaoManIluminacaoPublicaResponseDto(entity);
 
         return responseDto;
     }
 
     @Transactional(readOnly = true)
-    public SolicitacaoManViaPublicaResponseDto getById(Long id) {
-        SolicitacaoManViaPublica entity = this.repository.findById(id).orElseThrow(
+    public SolicitacaoManIluminacaoPublicaResponseDto getById(Long id) {
+        SolicitacaoManIluminacaoPublica entity = this.repository.findById(id).orElseThrow(
                 () -> new RuntimeException(String.format("Solicitação com id= %s não encontrado", id))
         );
 
-        SolicitacaoManViaPublicaResponseDto responseDto = getSolicitacaoManViaPublicaResponseDto(entity);
+        SolicitacaoManIluminacaoPublicaResponseDto responseDto = getSolicitacaoManIluminacaoPublicaResponseDto(entity);
 
         return responseDto;
     }
 
     @Transactional(readOnly = true)
-    public Page<SolicitacaoManViaPublicaProjection> getAll(Pageable pageable) {
+    public Page<SolicitacaoManIluminacaoPublicaProjection> getAll(Pageable pageable) {
         return this.repository.findAllPageable(pageable);
     }
 
     @Transactional
-    public SolicitacaoManViaPublicaResponseDto update(SolicitacaoManViaPublicaUpdateDto dto, Long id) {
-        SolicitacaoManViaPublica entity = this.repository.findById(id).orElseThrow(
+    public SolicitacaoManIluminacaoPublicaResponseDto update(SolicitacaoManIluminacaoPublicaUpdateDto dto, Long id) {
+        SolicitacaoManIluminacaoPublica entity = this.repository.findById(id).orElseThrow(
                 () -> new RuntimeException(String.format("Solicitação com id= %s não encontrado", id))
         );
 
@@ -73,19 +71,19 @@ public class SolicitacaoManViaPublicaService {
 
         entity = this.repository.save(entity);
 
-        SolicitacaoManViaPublicaResponseDto responseDto = getSolicitacaoManViaPublicaResponseDto(entity);
+        SolicitacaoManIluminacaoPublicaResponseDto responseDto = getSolicitacaoManIluminacaoPublicaResponseDto(entity);
 
         return responseDto;
     }
 
     @Transactional
     public void delete(Long id) {
-        SolicitacaoManViaPublica solicitacao = repository.getById(id);
+        SolicitacaoManIluminacaoPublica solicitacao = repository.getById(id);
         repository.delete(solicitacao);
     }
 
-    private static SolicitacaoManViaPublicaResponseDto getSolicitacaoManViaPublicaResponseDto(SolicitacaoManViaPublica entity) {
-        SolicitacaoManViaPublicaResponseDto responseDto = new SolicitacaoManViaPublicaResponseDto();
+    private static SolicitacaoManIluminacaoPublicaResponseDto getSolicitacaoManIluminacaoPublicaResponseDto(SolicitacaoManIluminacaoPublica entity) {
+        SolicitacaoManIluminacaoPublicaResponseDto responseDto = new SolicitacaoManIluminacaoPublicaResponseDto();
         responseDto.setId(entity.getId());
         responseDto.setDescricao(entity.getDescricao());
         responseDto.setComentarios(entity.getComentarios());

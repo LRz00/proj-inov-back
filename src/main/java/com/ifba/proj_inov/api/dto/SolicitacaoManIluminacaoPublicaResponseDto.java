@@ -2,38 +2,36 @@ package com.ifba.proj_inov.api.dto;
 
 import com.ifba.proj_inov.core.entitites.Usuario;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
-public class SolicitacaoManViaPublicaCreateDto {
+public class SolicitacaoManIluminacaoPublicaResponseDto {
 
-    @NotBlank
+    private Long id;
     private String descricao;
-
-    @NotBlank
     private String dataCriada;
-
     private SolicitacaoStatusEnum status;
-
-    @NotNull
     private Usuario solicitante;
-
-    @NotBlank
+    private String comentarios;
     private String bairro;
-
-    @NotBlank
     private String nomeRua;
 
-    public SolicitacaoManViaPublicaCreateDto() {
+    public SolicitacaoManIluminacaoPublicaResponseDto() {
     }
 
-    public SolicitacaoManViaPublicaCreateDto(String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String bairro, String nomeRua) {
+    public SolicitacaoManIluminacaoPublicaResponseDto(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios) {
+        this.id = id;
         this.descricao = descricao;
         this.dataCriada = dataCriada;
         this.status = status;
         this.solicitante = solicitante;
-        this.bairro = bairro;
-        this.nomeRua = nomeRua;
+        this.comentarios = comentarios;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescricao() {
@@ -66,6 +64,14 @@ public class SolicitacaoManViaPublicaCreateDto {
 
     public void setSolicitante(Usuario solicitante) {
         this.solicitante = solicitante;
+    }
+
+    public String getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
     }
 
     public String getBairro() {

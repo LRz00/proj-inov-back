@@ -4,6 +4,8 @@ import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import jakarta.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "dtype")
 @Table(name = "SOLICITACAO")
 public class Solicitacao {
 
@@ -37,7 +39,7 @@ public class Solicitacao {
     @JoinColumn(name = "solicitante", nullable = false)
     private Usuario solicitante;
 
-    @Column(name = "comentarios", nullable = false)
+    @Column(name = "comentarios")
     private String comentarios;
 
     public Long getId() {

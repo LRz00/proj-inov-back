@@ -4,11 +4,10 @@ import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
 @Entity
-@DiscriminatorValue("SolicitacaoManViaPublica")
-public class SolicitacaoManViaPublica extends Solicitacao{
+@DiscriminatorValue("SolicitacaoManIluminacaoPublica")
+public class SolicitacaoManIluminacaoPublica extends Solicitacao{
 
     @Column(name = "bairro", nullable = false)
     private String bairro;
@@ -16,15 +15,15 @@ public class SolicitacaoManViaPublica extends Solicitacao{
     @Column(name = "nome_rua", nullable = false)
     private String nomeRua;
 
-    public SolicitacaoManViaPublica() {
+    public SolicitacaoManIluminacaoPublica() {
     }
 
-    public SolicitacaoManViaPublica(String bairro, String nomeRua) {
+    public SolicitacaoManIluminacaoPublica(String bairro, String nomeRua) {
         this.bairro = bairro;
         this.nomeRua = nomeRua;
     }
 
-    public SolicitacaoManViaPublica(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, String bairro, String nomeRua) {
+    public SolicitacaoManIluminacaoPublica(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, String bairro, String nomeRua) {
         super(id, descricao, dataCriada, status, solicitante, comentarios);
         this.bairro = bairro;
         this.nomeRua = nomeRua;
