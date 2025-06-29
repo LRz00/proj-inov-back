@@ -4,10 +4,10 @@ import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.Getter;
+import jakarta.persistence.Table;
 
 @Entity
-@DiscriminatorValue("SolicitacaoPlantioArvore")
+@Table(name="SolicitacaoPlantioArvore")
 public class SolicitacaoPlantioArvore extends Solicitacao {
 
     @Column(name = "nome_rua", nullable = false)
@@ -21,6 +21,7 @@ public class SolicitacaoPlantioArvore extends Solicitacao {
 
     @Column(name = "numero_Casa", nullable = false)
     private String numCasa;
+
 
     public SolicitacaoPlantioArvore() {
 
