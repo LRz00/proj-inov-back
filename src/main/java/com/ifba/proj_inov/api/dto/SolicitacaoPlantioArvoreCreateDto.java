@@ -16,10 +16,10 @@ public class SolicitacaoPlantioArvoreCreateDto {
     @NotBlank
     private String dataCriada;
 
-    @NotBlank
+    
     private String nomeArvore;
 
-    @NotBlank
+    
     private String numCasa;
 
     @NotBlank

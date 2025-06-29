@@ -16,10 +16,10 @@ public class SolicitacaoPlantioArvore extends Solicitacao {
     @Column(name = "bairro", nullable = false)
     private String bairro;
 
-    @Column(name = "nome_Arvore", nullable = false)
+    @Column(name = "nome_Arvore")
     private String nomeArvore;
 
-    @Column(name = "numero_Casa", nullable = false)
+    @Column(name = "numero_Casa")
     private String numCasa;
 
     public SolicitacaoPlantioArvore() {
