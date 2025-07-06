@@ -9,10 +9,10 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("SolicitacaoManIluminacaoPublica")
 public class SolicitacaoManIluminacaoPublica extends Solicitacao{
 
-    @Column(name = "bairro", nullable = false)
+    @Column(name = "bairro")
     private String bairro;
 
-    @Column(name = "nome_rua", nullable = false)
+    @Column(name = "nome_rua")
     private String nomeRua;
 
     public SolicitacaoManIluminacaoPublica() {
