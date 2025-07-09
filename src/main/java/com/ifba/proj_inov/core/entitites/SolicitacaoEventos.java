@@ -8,7 +8,6 @@ import jakarta.persistence.Entity;
 import java.time.LocalDateTime;
 
 @Entity
-@DiscriminatorValue("SilicitacaoEventos")
 public class SolicitacaoEventos extends Solicitacao {
 
     public SolicitacaoEventos() {
