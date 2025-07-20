@@ -1,10 +1,8 @@
 package com.ifba.proj_inov.api.controller;
 
-import com.ifba.proj_inov.api.dto.PageableDto;
-import com.ifba.proj_inov.api.dto.SolicitacaoEventosCreateDto;
-import com.ifba.proj_inov.api.dto.SolicitacaoEventosResponseDto;
-import com.ifba.proj_inov.api.dto.SolicitacaoEventosUpdateDto;
+import com.ifba.proj_inov.api.dto.*;
 import com.ifba.proj_inov.api.mapper.PageableMapper;
+import com.ifba.proj_inov.core.repository.SolicitacaoEventosRepository;
 import com.ifba.proj_inov.core.repository.projection.SolicitacaoEventosProjection;
 import com.ifba.proj_inov.core.service.SolicitacaoEventosService;
 import jakarta.validation.Valid;
@@ -20,10 +18,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/solicitacao-eventos")
 public class SolicitacaoEventosController {
     private final SolicitacaoEventosService service;
+    private final SolicitacaoEventosRepository repository;
 
     @Autowired
-    public SolicitacaoEventosController(SolicitacaoEventosService service) {
+    public SolicitacaoEventosController(SolicitacaoEventosService service, SolicitacaoEventosRepository repository) {
         this.service = service;
+        this.repository = repository;
     }
 
     @PostMapping

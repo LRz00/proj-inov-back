@@ -1,10 +1,10 @@
 package com.ifba.proj_inov.api.controller;
 
-import com.ifba.proj_inov.api.dto.PageableDto;
-import com.ifba.proj_inov.api.dto.SolicitacaoManIluminacaoPublicaCreateDto;
-import com.ifba.proj_inov.api.dto.SolicitacaoManIluminacaoPublicaResponseDto;
-import com.ifba.proj_inov.api.dto.SolicitacaoManIluminacaoPublicaUpdateDto;
+import com.ifba.proj_inov.api.dto.*;
 import com.ifba.proj_inov.api.mapper.PageableMapper;
+import com.ifba.proj_inov.core.entitites.Solicitacao;
+import com.ifba.proj_inov.core.entitites.SolicitacaoManIluminacaoPublica;
+import com.ifba.proj_inov.core.repository.SolicitacaoManIluminacaoPublicaRepository;
 import com.ifba.proj_inov.core.repository.projection.SolicitacaoManIluminacaoPublicaProjection;
 import com.ifba.proj_inov.core.service.SolicitacaoManIluminacaoPublicaService;
 import jakarta.validation.Valid;
@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.*;
 public class SolicitacaoManIluminacaoPublicaController {
 
     private final SolicitacaoManIluminacaoPublicaService service;
+    private final SolicitacaoManIluminacaoPublicaRepository repository;
 
     @Autowired
-    public SolicitacaoManIluminacaoPublicaController(SolicitacaoManIluminacaoPublicaService service) {
+    public SolicitacaoManIluminacaoPublicaController(SolicitacaoManIluminacaoPublicaService service, SolicitacaoManIluminacaoPublicaRepository repository) {
         this.service = service;
+        this.repository = repository;
     }
 
     @PostMapping
@@ -55,6 +57,29 @@ public class SolicitacaoManIluminacaoPublicaController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/avaliar")
+    public ResponseEntity<SolicitacaoManIluminacaoPublicaResponseDto> avaliarSolicitacao(
+            @PathVariable Long id,
+            @RequestParam Double nota) {
+
+        return repository.findById(id)
+                .map(solicitacao -> {
+                    solicitacao.adicionarNota(nota);
+                    SolicitacaoManIluminacaoPublica solicitacaoAtualizada = repository.save(solicitacao);
+
+                    SolicitacaoManIluminacaoPublicaResponseDto responseDto = service.getSolicitacaoManIluminacaoPublicaResponseDto(solicitacaoAtualizada);
+                    return ResponseEntity.ok(responseDto);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/{id}/media")
+    public ResponseEntity<Double> obterMediaAvaliacoes(@PathVariable Long id) {
+        return repository.findById(id)
+                .map(solicitacao -> ResponseEntity.ok(solicitacao.calcularMedia()))
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }

@@ -1,13 +1,12 @@
 package com.ifba.proj_inov.api.controller;
 
-import com.ifba.proj_inov.api.dto.PageableDto;
-import com.ifba.proj_inov.api.dto.SolicitacaoManViaPublicaCreateDto;
-import com.ifba.proj_inov.api.dto.SolicitacaoManViaPublicaResponseDto;
-import com.ifba.proj_inov.api.dto.SolicitacaoManViaPublicaUpdateDto;
+import com.ifba.proj_inov.api.dto.*;
 import com.ifba.proj_inov.api.mapper.PageableMapper;
 import com.ifba.proj_inov.api.mapper.SolicitacaoManViaPublicaMapper;
 import com.ifba.proj_inov.core.entitites.Solicitacao;
+import com.ifba.proj_inov.core.entitites.SolicitacaoManIluminacaoPublica;
 import com.ifba.proj_inov.core.entitites.SolicitacaoManViaPublica;
+import com.ifba.proj_inov.core.repository.SolicitacaoManViaPublicaRepository;
 import com.ifba.proj_inov.core.repository.projection.SolicitacaoManViaPublicaProjection;
 import com.ifba.proj_inov.core.service.SolicitacaoManViaPublicaService;
 import jakarta.validation.Valid;
@@ -24,10 +23,12 @@ import org.springframework.web.bind.annotation.*;
 public class SolicitacaoManViaPublicaController {
 
     private final SolicitacaoManViaPublicaService service;
+    private final SolicitacaoManViaPublicaRepository repository;
 
     @Autowired
-    public SolicitacaoManViaPublicaController(SolicitacaoManViaPublicaService service) {
+    public SolicitacaoManViaPublicaController(SolicitacaoManViaPublicaService service, SolicitacaoManViaPublicaRepository repository) {
         this.service = service;
+        this.repository = repository;
     }
 
     @PostMapping
@@ -58,6 +59,29 @@ public class SolicitacaoManViaPublicaController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/avaliar")
+    public ResponseEntity<SolicitacaoManViaPublicaResponseDto> avaliarSolicitacao(
+            @PathVariable Long id,
+            @RequestParam Double nota) {
+
+        return repository.findById(id)
+                .map(solicitacao -> {
+                    solicitacao.adicionarNota(nota);
+                    SolicitacaoManViaPublica solicitacaoAtualizada = repository.save(solicitacao);
+
+                    SolicitacaoManViaPublicaResponseDto responseDto = service.getSolicitacaoManViaPublicaResponseDto(solicitacaoAtualizada);
+                    return ResponseEntity.ok(responseDto);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/{id}/media")
+    public ResponseEntity<Double> obterMediaAvaliacoes(@PathVariable Long id) {
+        return repository.findById(id)
+                .map(solicitacao -> ResponseEntity.ok(solicitacao.calcularMedia()))
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }

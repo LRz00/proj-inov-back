@@ -82,7 +82,7 @@ public class SolicitacaoManIluminacaoPublicaService {
         repository.delete(solicitacao);
     }
 
-    private static SolicitacaoManIluminacaoPublicaResponseDto getSolicitacaoManIluminacaoPublicaResponseDto(SolicitacaoManIluminacaoPublica entity) {
+    public SolicitacaoManIluminacaoPublicaResponseDto getSolicitacaoManIluminacaoPublicaResponseDto(SolicitacaoManIluminacaoPublica entity) {
         SolicitacaoManIluminacaoPublicaResponseDto responseDto = new SolicitacaoManIluminacaoPublicaResponseDto();
         responseDto.setId(entity.getId());
         responseDto.setDescricao(entity.getDescricao());
