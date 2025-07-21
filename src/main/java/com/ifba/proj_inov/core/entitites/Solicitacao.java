@@ -3,9 +3,11 @@ package com.ifba.proj_inov.core.entitites;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dtype")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "SOLICITACAO")
 public class Solicitacao {
 
@@ -22,7 +24,7 @@ public class Solicitacao {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
@@ -41,6 +43,32 @@ public class Solicitacao {
 
     @Column(name = "comentarios")
     private String comentarios;
+
+    @ElementCollection
+    private List<Double> notas = new ArrayList<>();
+
+    public void adicionarNota(Double nota) {
+        if (nota != null && nota >= 0 && nota <= 5) {
+            this.notas.add(nota);
+        }
+    }
+
+    public Double calcularMedia() {
+        if (notas.isEmpty()) {
+            return 0.0;
+        }
+
+        double soma = 0.0;
+        for (Double nota : notas) {
+            soma += nota;
+        }
+
+        return soma / notas.size();
+    }
+
+    public int getQuantidadeAvaliacoes() {
+        return notas.size();
+    }
 
     public Long getId() {
         return id;
@@ -88,5 +116,13 @@ public class Solicitacao {
 
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public List<Double> getNotas() {
+        return notas;
+    }
+
+    public void setNotas(List<Double> notas) {
+        this.notas = notas;
     }
 }

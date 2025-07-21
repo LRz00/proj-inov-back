@@ -2,13 +2,10 @@ package com.ifba.proj_inov.api.controller;
 
 import com.ifba.proj_inov.api.dto.*;
 import com.ifba.proj_inov.api.mapper.PageableMapper;
-import com.ifba.proj_inov.api.mapper.SolicitacaoManViaPublicaMapper;
-import com.ifba.proj_inov.core.entitites.Solicitacao;
-import com.ifba.proj_inov.core.entitites.SolicitacaoManIluminacaoPublica;
-import com.ifba.proj_inov.core.entitites.SolicitacaoManViaPublica;
-import com.ifba.proj_inov.core.repository.SolicitacaoManViaPublicaRepository;
-import com.ifba.proj_inov.core.repository.projection.SolicitacaoManViaPublicaProjection;
-import com.ifba.proj_inov.core.service.SolicitacaoManViaPublicaService;
+import com.ifba.proj_inov.core.entitites.SolicitacaoEventos;
+import com.ifba.proj_inov.core.repository.SolicitacaoEventosRepository;
+import com.ifba.proj_inov.core.repository.projection.SolicitacaoEventosProjection;
+import com.ifba.proj_inov.core.service.SolicitacaoEventosService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,39 +16,38 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/solicitacao-man-via-publica")
-public class SolicitacaoManViaPublicaController {
-
-    private final SolicitacaoManViaPublicaService service;
-    private final SolicitacaoManViaPublicaRepository repository;
+@RequestMapping("/solicitacao-eventos")
+public class SolicitacaoEventosController {
+    private final SolicitacaoEventosService service;
+    private final SolicitacaoEventosRepository repository;
 
     @Autowired
-    public SolicitacaoManViaPublicaController(SolicitacaoManViaPublicaService service, SolicitacaoManViaPublicaRepository repository) {
+    public SolicitacaoEventosController(SolicitacaoEventosService service, SolicitacaoEventosRepository repository) {
         this.service = service;
         this.repository = repository;
     }
 
     @PostMapping
-    public ResponseEntity<SolicitacaoManViaPublicaResponseDto> salvar(@Valid @RequestBody SolicitacaoManViaPublicaCreateDto createDto) {
-        SolicitacaoManViaPublicaResponseDto solicitacao = service.salvar(createDto);
+    public ResponseEntity<SolicitacaoEventosResponseDto> salvar(@Valid @RequestBody SolicitacaoEventosCreateDto createDto) {
+        SolicitacaoEventosResponseDto solicitacao = service.salvar(createDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(solicitacao);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SolicitacaoManViaPublicaResponseDto> getById(@PathVariable Long id) {
-        SolicitacaoManViaPublicaResponseDto solicitacao = service.getById(id);
+    public ResponseEntity<SolicitacaoEventosResponseDto> getById(@PathVariable Long id) {
+        SolicitacaoEventosResponseDto solicitacao = service.getById(id);
         return ResponseEntity.ok(solicitacao);
     }
 
     @GetMapping
     public ResponseEntity<PageableDto> getAllSolicitacoes(Pageable pageable) {
-        Page<SolicitacaoManViaPublicaProjection> solicitacoes = service.getAll(pageable);
+        Page<SolicitacaoEventosProjection> solicitacoes = service.getAll(pageable);
         return ResponseEntity.ok(PageableMapper.toDto(solicitacoes));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<SolicitacaoManViaPublicaResponseDto> update(@RequestBody SolicitacaoManViaPublicaUpdateDto dto, @PathVariable Long id) {
-        SolicitacaoManViaPublicaResponseDto solicitacao = service.update(dto, id);
+    public ResponseEntity<SolicitacaoEventosResponseDto> update(@RequestBody SolicitacaoEventosUpdateDto dto, @PathVariable Long id) {
+        SolicitacaoEventosResponseDto solicitacao = service.update(dto, id);
         return ResponseEntity.ok(solicitacao);
     }
 
@@ -62,16 +58,16 @@ public class SolicitacaoManViaPublicaController {
     }
 
     @PostMapping("/{id}/avaliar")
-    public ResponseEntity<SolicitacaoManViaPublicaResponseDto> avaliarSolicitacao(
+    public ResponseEntity<SolicitacaoEventosResponseDto> avaliarSolicitacao(
             @PathVariable Long id,
             @RequestParam Double nota) {
 
         return repository.findById(id)
                 .map(solicitacao -> {
                     solicitacao.adicionarNota(nota);
-                    SolicitacaoManViaPublica solicitacaoAtualizada = repository.save(solicitacao);
+                    SolicitacaoEventos solicitacaoAtualizada = repository.save(solicitacao);
 
-                    SolicitacaoManViaPublicaResponseDto responseDto = service.getSolicitacaoManViaPublicaResponseDto(solicitacaoAtualizada);
+                    SolicitacaoEventosResponseDto responseDto = service.getSolicitacaoEventosResponseDto(solicitacaoAtualizada);
                     return ResponseEntity.ok(responseDto);
                 })
                 .orElse(ResponseEntity.notFound().build());
@@ -83,5 +79,5 @@ public class SolicitacaoManViaPublicaController {
                 .map(solicitacao -> ResponseEntity.ok(solicitacao.calcularMedia()))
                 .orElse(ResponseEntity.notFound().build());
     }
-
 }
+

@@ -84,7 +84,7 @@ public class SolicitacaoManViaPublicaService {
         repository.delete(solicitacao);
     }
 
-    private static SolicitacaoManViaPublicaResponseDto getSolicitacaoManViaPublicaResponseDto(SolicitacaoManViaPublica entity) {
+    public SolicitacaoManViaPublicaResponseDto getSolicitacaoManViaPublicaResponseDto(SolicitacaoManViaPublica entity) {
         SolicitacaoManViaPublicaResponseDto responseDto = new SolicitacaoManViaPublicaResponseDto();
         responseDto.setId(entity.getId());
         responseDto.setDescricao(entity.getDescricao());

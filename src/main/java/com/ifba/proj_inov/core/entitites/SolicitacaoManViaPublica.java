@@ -7,7 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@DiscriminatorValue("SolicitacaoManViaPublica")
 public class SolicitacaoManViaPublica extends Solicitacao{
 
     @Column(name = "bairro")
