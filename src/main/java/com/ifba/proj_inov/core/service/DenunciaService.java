@@ -83,7 +83,7 @@ public class DenunciaService {
         repository.delete(denuncia);
     }
 
-    private static DenunciaResponseDto getDenunciaResponseDto(Denuncia entity) {
+    public DenunciaResponseDto getDenunciaResponseDto(Denuncia entity) {
         DenunciaResponseDto responseDto = new DenunciaResponseDto();
         responseDto.setId(entity.getId());
         responseDto.setDescricao(entity.getDescricao());
