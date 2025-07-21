@@ -64,5 +64,22 @@ public class SolicitacaoEventosService {
         SolicitacaoEventos entity = repository.getById(id);
         repository.delete(entity);
     }
+
+    public SolicitacaoEventosResponseDto getSolicitacaoEventosResponseDto(SolicitacaoEventos entity) {
+        SolicitacaoEventosResponseDto responseDto = new SolicitacaoEventosResponseDto();
+        responseDto.setId(entity.getId());
+        responseDto.setDescricao(entity.getDescricao());
+        responseDto.setDataCriada(entity.getDataCriada());
+        responseDto.setStatus(entity.getStatus());
+        responseDto.setSolicitante(entity.getSolicitante());
+        responseDto.setComentarios(entity.getComentarios());
+        responseDto.setBairro(entity.getBairro());
+        responseDto.setNomeRua(entity.getNomeRua());
+        responseDto.setLocal(entity.getLocal());
+        responseDto.setDataEvento(entity.getDataEvento());
+        responseDto.setTipoEvento(entity.getTipoEvento());
+
+        return responseDto;
+    }
 }
 
