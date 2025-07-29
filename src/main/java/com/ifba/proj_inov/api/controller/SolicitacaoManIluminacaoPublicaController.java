@@ -75,11 +75,10 @@ public class SolicitacaoManIluminacaoPublicaController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/{id}/media")
-    public ResponseEntity<Double> obterMediaAvaliacoes(@PathVariable Long id) {
-        return repository.findById(id)
-                .map(solicitacao -> ResponseEntity.ok(solicitacao.calcularMedia()))
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/media")
+    public ResponseEntity<Double> obterMediaAvaliacoes() {
+        Double media = service.calcularMedia();
+        return ResponseEntity.ok(media);
     }
 
 }

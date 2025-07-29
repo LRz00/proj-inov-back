@@ -7,6 +7,7 @@ import com.ifba.proj_inov.api.mapper.SolicitacaoEventosMapper;
 import com.ifba.proj_inov.core.entitites.SolicitacaoEventos;
 import com.ifba.proj_inov.core.repository.SolicitacaoEventosRepository;
 import com.ifba.proj_inov.core.repository.projection.SolicitacaoEventosProjection;
+import com.ifba.proj_inov.core.utils.MediaDeSolicitacao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,13 +15,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class SolicitacaoEventosService {
     private final SolicitacaoEventosRepository repository;
+    private final MediaDeSolicitacao media;
 
     @Autowired
-    public SolicitacaoEventosService(SolicitacaoEventosRepository repository) {
+    public SolicitacaoEventosService(SolicitacaoEventosRepository repository, MediaDeSolicitacao media) {
         this.repository = repository;
+        this.media = media;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -80,6 +85,11 @@ public class SolicitacaoEventosService {
         responseDto.setTipoEvento(entity.getTipoEvento());
 
         return responseDto;
+    }
+
+    public Double calcularMedia() {
+        List<SolicitacaoEventos> todas = repository.findAll();
+        return media.calcularMediaGeral(todas);
     }
 }
 

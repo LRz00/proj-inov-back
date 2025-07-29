@@ -3,9 +3,11 @@ package com.ifba.proj_inov.core.service;
 import com.ifba.proj_inov.api.dto.SolicitacaoManIluminacaoPublicaCreateDto;
 import com.ifba.proj_inov.api.dto.SolicitacaoManIluminacaoPublicaResponseDto;
 import com.ifba.proj_inov.api.dto.SolicitacaoManIluminacaoPublicaUpdateDto;
+import com.ifba.proj_inov.core.entitites.SolicitacaoEventos;
 import com.ifba.proj_inov.core.entitites.SolicitacaoManIluminacaoPublica;
 import com.ifba.proj_inov.core.repository.SolicitacaoManIluminacaoPublicaRepository;
 import com.ifba.proj_inov.core.repository.projection.SolicitacaoManIluminacaoPublicaProjection;
+import com.ifba.proj_inov.core.utils.MediaDeSolicitacao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,14 +15,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class SolicitacaoManIluminacaoPublicaService {
 
     private final SolicitacaoManIluminacaoPublicaRepository repository;
+    private final MediaDeSolicitacao media;
 
     @Autowired
-    public SolicitacaoManIluminacaoPublicaService(SolicitacaoManIluminacaoPublicaRepository repository) {
+    public SolicitacaoManIluminacaoPublicaService(SolicitacaoManIluminacaoPublicaRepository repository, MediaDeSolicitacao media) {
         this.repository = repository;
+        this.media = media;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -93,5 +99,10 @@ public class SolicitacaoManIluminacaoPublicaService {
         responseDto.setBairro(entity.getBairro());
         responseDto.setNomeRua(entity.getNomeRua());
         return responseDto;
+    }
+
+    public Double calcularMedia() {
+        List<SolicitacaoManIluminacaoPublica> todas = repository.findAll();
+        return media.calcularMediaGeral(todas);
     }
 }
