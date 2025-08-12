@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DenunciaRepository extends JpaRepository<Denuncia, Long> {
 
-    @Query("SELECT s FROM Solicitacao s")
+    @Query("SELECT s FROM Denuncia s")
     Page<DenunciaProjection> findAllPageable(Pageable pageable);
 
 }

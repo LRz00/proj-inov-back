@@ -11,9 +11,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SolicitacaoManIluminacaoPublicaRepository extends JpaRepository<SolicitacaoManIluminacaoPublica, Long> {
+public interface SolicitacaoManIluminacaoPublicaRepository
+        extends JpaRepository<SolicitacaoManIluminacaoPublica, Long> {
 
-    @Query("SELECT s FROM Solicitacao s")
+    @Query("SELECT s FROM SolicitacaoManIluminacaoPublica s")
     Page<SolicitacaoManIluminacaoPublicaProjection> findAllPageable(Pageable pageable);
 
 }

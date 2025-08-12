@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SolicitacaoManViaPublicaRepository extends JpaRepository<SolicitacaoManViaPublica, Long> {
 
-    @Query("SELECT s FROM Solicitacao s")
+    @Query("SELECT s FROM SolicitacaoManViaPublica s")
     Page<SolicitacaoManViaPublicaProjection> findAllPageable(Pageable pageable);
 
 }
