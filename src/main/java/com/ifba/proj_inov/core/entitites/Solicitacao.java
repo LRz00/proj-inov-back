@@ -1,5 +1,6 @@
 package com.ifba.proj_inov.core.entitites;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import jakarta.persistence.*;
 
@@ -14,13 +15,15 @@ public class Solicitacao {
     public Solicitacao() {
     }
 
-    public Solicitacao(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios) {
+    public Solicitacao(Long id, String descricao, String dataCriada, String dataConcluida, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, List<Double> notas) {
         this.id = id;
         this.descricao = descricao;
         this.dataCriada = dataCriada;
+        this.dataConcluida = dataConcluida;
         this.status = status;
         this.solicitante = solicitante;
         this.comentarios = comentarios;
+        this.notas = notas;
     }
 
     @Id
@@ -33,6 +36,9 @@ public class Solicitacao {
 
     @Column(name = "dataCriada", nullable = false)
     private String dataCriada;
+
+    @Column(name = "dataConcluida")
+    private String dataConcluida;
 
     @Column(name = "status", nullable = false)
     private SolicitacaoStatusEnum status;
@@ -124,5 +130,13 @@ public class Solicitacao {
 
     public void setNotas(List<Double> notas) {
         this.notas = notas;
+    }
+
+    public String getDataConcluida() {
+        return dataConcluida;
+    }
+
+    public void setDataConcluida(String dataConcluida) {
+        this.dataConcluida = dataConcluida;
     }
 }

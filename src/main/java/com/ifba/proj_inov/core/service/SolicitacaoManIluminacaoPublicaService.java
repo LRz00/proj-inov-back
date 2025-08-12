@@ -38,6 +38,7 @@ public class SolicitacaoManIluminacaoPublicaService {
         entity.setSolicitante(createDto.getSolicitante());
         entity.setBairro(createDto.getBairro());
         entity.setNomeRua(createDto.getNomeRua());
+        entity.setPrioridade(createDto.getPrioridade());
         entity = this.repository.save(entity);
 
         SolicitacaoManIluminacaoPublicaResponseDto responseDto = getSolicitacaoManIluminacaoPublicaResponseDto(entity);
@@ -75,6 +76,18 @@ public class SolicitacaoManIluminacaoPublicaService {
             entity.setComentarios(dto.getComentarios());
         }
 
+        if(dto.getDataConcluida() != null) {
+            entity.setDataConcluida(dto.getDataConcluida());
+        }
+
+        if(dto.getPrioridade() != null) {
+            entity.setPrioridade(dto.getPrioridade());
+        }
+
+        if(dto.getStatus() != null) {
+            entity.setStatus(dto.getStatus());
+        }
+
         entity = this.repository.save(entity);
 
         SolicitacaoManIluminacaoPublicaResponseDto responseDto = getSolicitacaoManIluminacaoPublicaResponseDto(entity);
@@ -98,6 +111,8 @@ public class SolicitacaoManIluminacaoPublicaService {
         responseDto.setSolicitante(entity.getSolicitante());
         responseDto.setBairro(entity.getBairro());
         responseDto.setNomeRua(entity.getNomeRua());
+        responseDto.setDataConcluida(entity.getDataConcluida());
+        responseDto.setPrioridade(entity.getPrioridade());
         return responseDto;
     }
 

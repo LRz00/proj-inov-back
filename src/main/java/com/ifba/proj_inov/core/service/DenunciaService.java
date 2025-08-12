@@ -32,7 +32,6 @@ public class DenunciaService {
         entity.setSolicitante(createDto.getSolicitante());
         entity.setPrioridade(createDto.getPrioridade());
         entity.setDenuncia(createDto.getDenuncia());
-        entity.setDataConcluida(createDto.getDataCriada());
         entity = this.repository.save(entity);
 
         DenunciaResponseDto responseDto = getDenunciaResponseDto(entity);
@@ -68,6 +67,22 @@ public class DenunciaService {
 
         if (dto.getComentarios() != null) {
             entity.setComentarios(dto.getComentarios());
+        }
+
+        if(dto.getDataConcluida() != null) {
+            entity.setDataConcluida(dto.getDataConcluida());
+        }
+
+        if(dto.getPrioridade() != null) {
+            entity.setPrioridade(dto.getPrioridade());
+        }
+
+        if(dto.getDenuncia() != null) {
+            entity.setDenuncia(dto.getDenuncia());
+        }
+
+        if(dto.getStatus() != null) {
+            entity.setStatus(dto.getStatus());
         }
 
         entity = this.repository.save(entity);

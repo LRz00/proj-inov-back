@@ -1,9 +1,13 @@
 package com.ifba.proj_inov.core.entitites;
 
+import com.ifba.proj_inov.core.entitites.enums.DenunciaEnum;
+import com.ifba.proj_inov.core.entitites.enums.PrioridadeEnum;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+
+import java.util.List;
 
 @Entity
 public class SolicitacaoManIluminacaoPublica extends Solicitacao{
@@ -14,18 +18,23 @@ public class SolicitacaoManIluminacaoPublica extends Solicitacao{
     @Column(name = "nome_rua")
     private String nomeRua;
 
+    @Column(name = "prioridade")
+    private PrioridadeEnum prioridade;
+
     public SolicitacaoManIluminacaoPublica() {
     }
 
-    public SolicitacaoManIluminacaoPublica(String bairro, String nomeRua) {
+    public SolicitacaoManIluminacaoPublica(String bairro, String nomeRua, PrioridadeEnum prioridade) {
         this.bairro = bairro;
         this.nomeRua = nomeRua;
+        this.prioridade = prioridade;
     }
 
-    public SolicitacaoManIluminacaoPublica(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, String bairro, String nomeRua) {
-        super(id, descricao, dataCriada, status, solicitante, comentarios);
+    public SolicitacaoManIluminacaoPublica(Long id, String descricao, String dataCriada, String dataConcluida, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, List<Double> notas, String bairro, String nomeRua, PrioridadeEnum prioridade) {
+        super(id, descricao, dataCriada, dataConcluida, status, solicitante, comentarios, notas);
         this.bairro = bairro;
         this.nomeRua = nomeRua;
+        this.prioridade = prioridade;
     }
 
     public String getBairro() {
@@ -42,5 +51,13 @@ public class SolicitacaoManIluminacaoPublica extends Solicitacao{
 
     public void setNomeRua(String nomeRua) {
         this.nomeRua = nomeRua;
+    }
+
+    public PrioridadeEnum getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(PrioridadeEnum prioridade) {
+        this.prioridade = prioridade;
     }
 }

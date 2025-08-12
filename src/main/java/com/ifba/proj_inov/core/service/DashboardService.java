@@ -1,12 +1,16 @@
 package com.ifba.proj_inov.core.service;
 
+import com.ifba.proj_inov.core.entitites.Solicitacao;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import com.ifba.proj_inov.core.repository.*;
 import com.ifba.proj_inov.core.service.enums.TipoSolicitacao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -85,5 +89,47 @@ public class DashboardService {
         }
 
         return porcentagens;
+    }
+
+    @Transactional(readOnly = true)
+    public Map<TipoSolicitacao, Double> getTempoMedioConclusaoPorTipo() {
+        Map<TipoSolicitacao, Double> medias = new HashMap<>();
+
+        medias.put(TipoSolicitacao.EVENTOS,
+                calcularMediaDias(eventosRepository.findAll()));
+        medias.put(TipoSolicitacao.ILUMINACAO,
+                calcularMediaDias(iluminacaoRepository.findAll()));
+        medias.put(TipoSolicitacao.VIA_PUBLICA,
+                calcularMediaDias(viaPublicaRepository.findAll()));
+        medias.put(TipoSolicitacao.PLANTIO,
+                calcularMediaDias(plantioRepository.findAll()));
+        medias.put(TipoSolicitacao.REMOCAO_ARVORE,
+                calcularMediaDias(remocaoArvoreCaidaRepository.findAll()));
+        medias.put(TipoSolicitacao.DENUNCIA,
+                calcularMediaDias(denunciaRepository.findAll()));
+
+        return medias;
+    }
+
+    private double calcularMediaDias(List<? extends Solicitacao> solicitacoes) {
+        var concluidas = solicitacoes.stream()
+                .filter(s -> s.getStatus() == SolicitacaoStatusEnum.CONCLUIDA
+                        && s.getDataCriada() != null
+                        && s.getDataConcluida() != null)
+                .toList();
+
+        if (concluidas.isEmpty()) {
+            return 0.0;
+        }
+
+        double somaDias = concluidas.stream()
+                .mapToDouble(s -> {
+                    LocalDate criada = LocalDate.parse(s.getDataCriada());
+                    LocalDate concluida = LocalDate.parse(s.getDataConcluida());
+                    return ChronoUnit.DAYS.between(criada, concluida);
+                })
+                .sum();
+
+        return somaDias / concluidas.size();
     }
 }

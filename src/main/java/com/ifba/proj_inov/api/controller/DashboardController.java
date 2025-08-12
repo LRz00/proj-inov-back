@@ -53,4 +53,9 @@ public class DashboardController {
     public ResponseEntity<Map<SolicitacaoStatusEnum, Long>> getContagemStatus() {
         return ResponseEntity.ok(service.getNumSolicitacoesPorStatus());
     }
+
+    @GetMapping("/tempo-medio-conclusao")
+    public Map<TipoSolicitacao, Double> getTempoMedioConclusao() {
+        return service.getTempoMedioConclusaoPorTipo();
+    }
 }

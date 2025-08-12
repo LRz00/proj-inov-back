@@ -6,6 +6,7 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class SolicitacaoEventos extends Solicitacao {
@@ -21,8 +22,8 @@ public class SolicitacaoEventos extends Solicitacao {
         this.tipoEvento = tipoEvento;
     }
 
-    public SolicitacaoEventos(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, String bairro, String nomeRua, String local, LocalDateTime dataEvento, String tipoEvento) {
-        super(id, descricao, dataCriada, status, solicitante, comentarios);
+    public SolicitacaoEventos(Long id, String descricao, String dataCriada, String dataConcluida, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, List<Double> notas, String bairro, String nomeRua, String local, LocalDateTime dataEvento, String tipoEvento) {
+        super(id, descricao, dataCriada, dataConcluida, status, solicitante, comentarios, notas);
         this.bairro = bairro;
         this.nomeRua = nomeRua;
         this.local = local;

@@ -1,6 +1,7 @@
 package com.ifba.proj_inov.api.dto;
 
 import com.ifba.proj_inov.core.entitites.Usuario;
+import com.ifba.proj_inov.core.entitites.enums.PrioridadeEnum;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,16 +25,20 @@ public class SolicitacaoManIluminacaoPublicaCreateDto {
     @NotBlank
     private String nomeRua;
 
+    @NotNull
+    private PrioridadeEnum prioridade;
+
     public SolicitacaoManIluminacaoPublicaCreateDto() {
     }
 
-    public SolicitacaoManIluminacaoPublicaCreateDto(String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String bairro, String nomeRua) {
+    public SolicitacaoManIluminacaoPublicaCreateDto(String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String bairro, String nomeRua, PrioridadeEnum prioridade) {
         this.descricao = descricao;
         this.dataCriada = dataCriada;
         this.status = status;
         this.solicitante = solicitante;
         this.bairro = bairro;
         this.nomeRua = nomeRua;
+        this.prioridade = prioridade;
     }
 
     public String getDescricao() {
@@ -82,5 +87,13 @@ public class SolicitacaoManIluminacaoPublicaCreateDto {
 
     public void setNomeRua(String nomeRua) {
         this.nomeRua = nomeRua;
+    }
+
+    public PrioridadeEnum getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(PrioridadeEnum prioridade) {
+        this.prioridade = prioridade;
     }
 }
