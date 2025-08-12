@@ -52,6 +52,12 @@ public class UsuariosController {
         return ResponseEntity.ok(PageableMapper.toDto(usuarios));
     }
 
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UsuariosResponseDto> getByEmail(@PathVariable String email){
+        Usuario usuario = usuariosService.getByEmail(email);
+        return ResponseEntity.ok(UsuariosMapper.toDto(usuario));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         usuariosService.delete(id);

@@ -54,6 +54,14 @@ public class UsuariosService {
         );
     }
 
+        @Transactional(readOnly = true)
+    public Usuario getByEmail(String email) {
+        return usuariosRepository.findByEmail(email).orElseThrow(
+                () -> new RuntimeException(String.format("Usuário com email= %s não encontrado", email))
+        );
+    }
+
+
     @Transactional(readOnly = true)
     public Page<UsuariosProjection> getAll(Pageable pageable) {
         return usuariosRepository.findAllPageable(pageable);
