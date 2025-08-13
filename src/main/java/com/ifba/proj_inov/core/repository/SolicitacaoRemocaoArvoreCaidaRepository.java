@@ -1,7 +1,6 @@
 package com.ifba.proj_inov.core.repository;
 
 import com.ifba.proj_inov.core.entitites.SolicitacaoRemocaoArvoreCaida;
-import com.ifba.proj_inov.core.repository.projection.SolicitacaoManViaPublicaProjection;
 import com.ifba.proj_inov.core.repository.projection.SolicitacaoRemocaoArvoreCaidaProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

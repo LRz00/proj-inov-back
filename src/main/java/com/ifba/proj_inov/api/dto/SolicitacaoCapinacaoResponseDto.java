@@ -1,18 +1,23 @@
-package com.ifba.proj_inov.core.entitites;
+package com.ifba.proj_inov.api.dto;
 
+import com.ifba.proj_inov.core.entitites.Usuario;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
-import jakarta.persistence.*;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "dtype")
-@Table(name = "SOLICITACAO")
-public class Solicitacao {
+public class SolicitacaoCapinacaoResponseDto {
 
-    public Solicitacao() {
+    private Long id;
+    private String descricao;
+    private String dataCriada;
+    private SolicitacaoStatusEnum status;
+    private Usuario solicitante;
+    private String comentarios;
+    private String bairro;
+    private String nomeRua;
+
+    public SolicitacaoCapinacaoResponseDto() {
     }
 
-    public Solicitacao(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios) {
+    public SolicitacaoCapinacaoResponseDto(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios) {
         this.id = id;
         this.descricao = descricao;
         this.dataCriada = dataCriada;
@@ -20,27 +25,6 @@ public class Solicitacao {
         this.solicitante = solicitante;
         this.comentarios = comentarios;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
-
-    @Column(name = "descricao", nullable = false)
-    private String descricao;
-
-    @Column(name = "dataCriada", nullable = false)
-    private String dataCriada;
-
-    @Column(name = "status", nullable = false)
-    private SolicitacaoStatusEnum status;
-
-    @ManyToOne
-    @JoinColumn(name = "solicitante", nullable = false)
-    private Usuario solicitante;
-
-    @Column(name = "comentarios")
-    private String comentarios;
 
     public Long getId() {
         return id;
@@ -88,5 +72,21 @@ public class Solicitacao {
 
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getNomeRua() {
+        return nomeRua;
+    }
+
+    public void setNomeRua(String nomeRua) {
+        this.nomeRua = nomeRua;
     }
 }
