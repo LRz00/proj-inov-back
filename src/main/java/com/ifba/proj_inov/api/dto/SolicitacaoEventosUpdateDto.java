@@ -1,5 +1,7 @@
 package com.ifba.proj_inov.api.dto;
 
+import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
+
 import java.time.LocalDateTime;
 
 public class SolicitacaoEventosUpdateDto {
@@ -10,7 +12,7 @@ public class SolicitacaoEventosUpdateDto {
     private String local;
     private LocalDateTime dataEvento;
     private String tipoEvento;
-    private String status;
+    private SolicitacaoStatusEnum status;
 
     public SolicitacaoEventosUpdateDto() {}
 
@@ -29,7 +31,7 @@ public class SolicitacaoEventosUpdateDto {
     public void setDataEvento(LocalDateTime dataEvento) { this.dataEvento = dataEvento; }
     public String getTipoEvento() { return tipoEvento; }
     public void setTipoEvento(String tipoEvento) { this.tipoEvento = tipoEvento; }
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public SolicitacaoStatusEnum getStatus() { return status; }
+    public void setStatus(SolicitacaoStatusEnum status) { this.status = status; }
 }
 

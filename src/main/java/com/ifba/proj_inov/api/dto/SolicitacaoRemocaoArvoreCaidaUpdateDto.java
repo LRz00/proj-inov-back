@@ -1,13 +1,15 @@
 package com.ifba.proj_inov.api.dto;
 
+import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
+
 public class SolicitacaoRemocaoArvoreCaidaUpdateDto {
     private String descricao;
     private String comentarios;
     private String bairro;
     private String nomeRua;
-    private String status;
+    private SolicitacaoStatusEnum status;
 
-    public SolicitacaoRemocaoArvoreCaidaUpdateDto(String descricao, String comentarios, String bairro, String nomeRua, String status) {
+    public SolicitacaoRemocaoArvoreCaidaUpdateDto(String descricao, String comentarios, String bairro, String nomeRua, SolicitacaoStatusEnum status) {
         this.descricao = descricao;
         this.comentarios = comentarios;
         this.bairro = bairro;
@@ -50,11 +52,11 @@ public class SolicitacaoRemocaoArvoreCaidaUpdateDto {
         this.nomeRua = nomeRua;
     }
 
-    public void setStatus(String status){
+    public void setStatus(SolicitacaoStatusEnum status){
         this.status = status;
     }
 
-    public String getStatus() {
+    public SolicitacaoStatusEnum getStatus() {
         return status;
     }
 
