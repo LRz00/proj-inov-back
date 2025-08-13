@@ -4,6 +4,7 @@ import com.ifba.proj_inov.core.entitites.Solicitacao;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import com.ifba.proj_inov.core.repository.*;
 import com.ifba.proj_inov.core.service.enums.TipoSolicitacao;
+import com.mysql.cj.xdevapi.AbstractDataResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +22,15 @@ public class DashboardService {
     public final SolicitacaoManViaPublicaRepository viaPublicaRepository;
     public final SolicitacaoPlantioArvoreRepository plantioRepository;
     public final SolicitacaoRemocaoArvoreCaidaRepository remocaoArvoreCaidaRepository;
+    public final SolicitacaoEnterroAberturaCovaRepository covaRepository;
+    public final SolicitacaoCapinacaoRepository capinacaoRepository;
+    public final SolicitacaoVistoriaRepository vistoriaRepository;
     public final DenunciaRepository denunciaRepository;
     private final UsuariosRepository usuariosRepository;
     private final SolicitacaoRepository solicitacaoRepository;
 
-    public DashboardService(SolicitacaoEventosRepository eventosRepository, SolicitacaoManIluminacaoPublicaRepository iluminacaoRepository, SolicitacaoManViaPublicaRepository viaPublicaRepository, SolicitacaoPlantioArvoreRepository plantioRepository, SolicitacaoRemocaoArvoreCaidaRepository remocaoArvoreCaidaRepository, DenunciaRepository denunciaRepository, UsuariosRepository usuariosRepository, SolicitacaoRepository solicitacaoRepository) {
+
+    public DashboardService(SolicitacaoEventosRepository eventosRepository, SolicitacaoManIluminacaoPublicaRepository iluminacaoRepository, SolicitacaoManViaPublicaRepository viaPublicaRepository, SolicitacaoPlantioArvoreRepository plantioRepository, SolicitacaoRemocaoArvoreCaidaRepository remocaoArvoreCaidaRepository, DenunciaRepository denunciaRepository, UsuariosRepository usuariosRepository, SolicitacaoRepository solicitacaoRepository, SolicitacaoEnterroAberturaCovaRepository covaRepository, SolicitacaoCapinacaoRepository capinacaoRepository, SolicitacaoVistoriaRepository vistoriaRepository) {
         this.eventosRepository = eventosRepository;
         this.iluminacaoRepository = iluminacaoRepository;
         this.viaPublicaRepository = viaPublicaRepository;
@@ -34,6 +39,9 @@ public class DashboardService {
         this.denunciaRepository = denunciaRepository;
         this.usuariosRepository = usuariosRepository;
         this.solicitacaoRepository = solicitacaoRepository;
+        this.covaRepository = covaRepository;
+        this.capinacaoRepository = capinacaoRepository;
+        this.vistoriaRepository = vistoriaRepository;
     }
 
     @Transactional(readOnly = true)
@@ -44,7 +52,10 @@ public class DashboardService {
                 viaPublicaRepository.count() +
                 plantioRepository.count() +
                 remocaoArvoreCaidaRepository.count() +
-                denunciaRepository.count());
+                denunciaRepository.count() +
+                covaRepository.count() +
+                capinacaoRepository.count() +
+                vistoriaRepository.count());
     }
 
     @Transactional(readOnly = true)
@@ -107,6 +118,12 @@ public class DashboardService {
                 calcularMediaDias(remocaoArvoreCaidaRepository.findAll()));
         medias.put(TipoSolicitacao.DENUNCIA,
                 calcularMediaDias(denunciaRepository.findAll()));
+        medias.put(TipoSolicitacao.COVAS,
+                calcularMediaDias(covaRepository.findAll()));
+        medias.put(TipoSolicitacao.CAPINACAO,
+                calcularMediaDias(capinacaoRepository.findAll()));
+        medias.put(TipoSolicitacao.VISTORIA,
+                calcularMediaDias(vistoriaRepository.findAll()));
 
         return medias;
     }

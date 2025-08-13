@@ -1,6 +1,5 @@
 package com.ifba.proj_inov.core.service.enums;
 
-import com.ifba.proj_inov.core.repository.SolicitacaoEventosRepository;
 import com.ifba.proj_inov.core.service.DashboardService;
 
 import java.util.function.ToLongFunction;
@@ -11,7 +10,10 @@ public enum TipoSolicitacao {
     VIA_PUBLICA(service -> service.viaPublicaRepository.count()),
     PLANTIO(service -> service.plantioRepository.count()),
     REMOCAO_ARVORE(service -> service.remocaoArvoreCaidaRepository.count()),
-    DENUNCIA(service -> service.denunciaRepository.count());
+    DENUNCIA(service -> service.denunciaRepository.count()),
+    COVAS(service -> service.covaRepository.count()),
+    CAPINACAO(service -> service.capinacaoRepository.count()),
+    VISTORIA(service -> service.vistoriaRepository.count());
 
     private final ToLongFunction<DashboardService> counter;
 
