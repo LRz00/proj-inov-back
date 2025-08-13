@@ -66,6 +66,10 @@ public class SolicitacaoEnterroAberturaCovaService {
             entity.setComentarios(dto.getComentarios());
         }
 
+        if (dto.getStatus() != null){
+            entity.setStatus(dto.getStatus());
+        }
+
         entity = this.repository.save(entity);
 
         return getSolicitacaoEnterroAberturaCovaResponseDto(entity);
