@@ -4,10 +4,12 @@ import com.ifba.proj_inov.api.dto.SolicitacaoManViaPublicaCreateDto;
 import com.ifba.proj_inov.api.dto.SolicitacaoManViaPublicaResponseDto;
 import com.ifba.proj_inov.api.dto.SolicitacaoManViaPublicaUpdateDto;
 import com.ifba.proj_inov.core.entitites.Solicitacao;
+import com.ifba.proj_inov.core.entitites.SolicitacaoEventos;
 import com.ifba.proj_inov.core.entitites.SolicitacaoManViaPublica;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import com.ifba.proj_inov.core.repository.SolicitacaoManViaPublicaRepository;
 import com.ifba.proj_inov.core.repository.projection.SolicitacaoManViaPublicaProjection;
+import com.ifba.proj_inov.core.utils.MediaDeSolicitacao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,14 +17,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class SolicitacaoManViaPublicaService {
 
     private final SolicitacaoManViaPublicaRepository repository;
+    private final MediaDeSolicitacao media;
 
     @Autowired
-    public SolicitacaoManViaPublicaService(SolicitacaoManViaPublicaRepository repository) {
+    public SolicitacaoManViaPublicaService(SolicitacaoManViaPublicaRepository repository, MediaDeSolicitacao media) {
         this.repository = repository;
+        this.media = media;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -34,6 +40,7 @@ public class SolicitacaoManViaPublicaService {
         entity.setSolicitante(createDto.getSolicitante());
         entity.setBairro(createDto.getBairro());
         entity.setNomeRua(createDto.getNomeRua());
+        entity.setPrioridade(createDto.getPrioridade());
         entity = this.repository.save(entity);
 
         SolicitacaoManViaPublicaResponseDto responseDto = getSolicitacaoManViaPublicaResponseDto(entity);
@@ -71,6 +78,18 @@ public class SolicitacaoManViaPublicaService {
             entity.setComentarios(dto.getComentarios());
         }
 
+        if(dto.getDataConcluida() != null) {
+            entity.setDataConcluida(dto.getDataConcluida());
+        }
+
+        if(dto.getPrioridade() != null) {
+            entity.setPrioridade(dto.getPrioridade());
+        }
+
+        if(dto.getStatus() != null) {
+            entity.setStatus(dto.getStatus());
+        }
+
         entity = this.repository.save(entity);
 
         SolicitacaoManViaPublicaResponseDto responseDto = getSolicitacaoManViaPublicaResponseDto(entity);
@@ -84,7 +103,7 @@ public class SolicitacaoManViaPublicaService {
         repository.delete(solicitacao);
     }
 
-    private static SolicitacaoManViaPublicaResponseDto getSolicitacaoManViaPublicaResponseDto(SolicitacaoManViaPublica entity) {
+    public SolicitacaoManViaPublicaResponseDto getSolicitacaoManViaPublicaResponseDto(SolicitacaoManViaPublica entity) {
         SolicitacaoManViaPublicaResponseDto responseDto = new SolicitacaoManViaPublicaResponseDto();
         responseDto.setId(entity.getId());
         responseDto.setDescricao(entity.getDescricao());
@@ -94,6 +113,13 @@ public class SolicitacaoManViaPublicaService {
         responseDto.setSolicitante(entity.getSolicitante());
         responseDto.setBairro(entity.getBairro());
         responseDto.setNomeRua(entity.getNomeRua());
+        responseDto.setDataConcluida(entity.getDataConcluida());
+        responseDto.setPrioridade(entity.getPrioridade());
         return responseDto;
+    }
+
+    public Double calcularMedia() {
+        List<SolicitacaoManViaPublica> todas = repository.findAll();
+        return media.calcularMediaGeral(todas);
     }
 }

@@ -4,8 +4,9 @@ import com.ifba.proj_inov.core.entitites.Usuario;
 import com.ifba.proj_inov.core.entitites.enums.DenunciaEnum;
 import com.ifba.proj_inov.core.entitites.enums.PrioridadeEnum;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
+import jakarta.validation.constraints.NotBlank;
 
-public class SolicitacaoManIluminacaoPublicaResponseDto {
+public class DenunciaResponseDto {
 
     private Long id;
     private String descricao;
@@ -13,26 +14,23 @@ public class SolicitacaoManIluminacaoPublicaResponseDto {
     private SolicitacaoStatusEnum status;
     private Usuario solicitante;
     private String comentarios;
-    private String bairro;
-    private String nomeRua;
     private PrioridadeEnum prioridade;
+    private DenunciaEnum denuncia;
     private String dataConcluida;
 
-    public SolicitacaoManIluminacaoPublicaResponseDto() {
+    public DenunciaResponseDto() {
     }
 
-    public SolicitacaoManIluminacaoPublicaResponseDto(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, String bairro, String nomeRua, PrioridadeEnum prioridade, String dataConcluida, SolicitacaoStatusEnum status1) {
+    public DenunciaResponseDto(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, PrioridadeEnum prioridade, DenunciaEnum denuncia, String dataConcluida) {
         this.id = id;
         this.descricao = descricao;
         this.dataCriada = dataCriada;
         this.status = status;
         this.solicitante = solicitante;
         this.comentarios = comentarios;
-        this.bairro = bairro;
-        this.nomeRua = nomeRua;
         this.prioridade = prioridade;
+        this.denuncia = denuncia;
         this.dataConcluida = dataConcluida;
-        this.status = status1;
     }
 
     public Long getId() {
@@ -83,28 +81,20 @@ public class SolicitacaoManIluminacaoPublicaResponseDto {
         this.comentarios = comentarios;
     }
 
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getNomeRua() {
-        return nomeRua;
-    }
-
-    public void setNomeRua(String nomeRua) {
-        this.nomeRua = nomeRua;
-    }
-
     public PrioridadeEnum getPrioridade() {
         return prioridade;
     }
 
     public void setPrioridade(PrioridadeEnum prioridade) {
         this.prioridade = prioridade;
+    }
+
+    public DenunciaEnum getDenuncia() {
+        return denuncia;
+    }
+
+    public void setDenuncia(DenunciaEnum denuncia) {
+        this.denuncia = denuncia;
     }
 
     public String getDataConcluida() {
@@ -114,6 +104,4 @@ public class SolicitacaoManIluminacaoPublicaResponseDto {
     public void setDataConcluida(String dataConcluida) {
         this.dataConcluida = dataConcluida;
     }
-
-
 }

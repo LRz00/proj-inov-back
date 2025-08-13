@@ -1,5 +1,6 @@
 package com.ifba.proj_inov.api.dto;
 
+import com.ifba.proj_inov.core.entitites.enums.PrioridadeEnum;
 import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 
 public class SolicitacaoManViaPublicaUpdateDto {
@@ -8,14 +9,18 @@ public class SolicitacaoManViaPublicaUpdateDto {
     private String comentarios;
     private String bairro;
     private String nomeRua;
-    private String status;
+    private SolicitacaoStatusEnum status;
+    private PrioridadeEnum prioridade;
+    private String dataConcluida;
 
-    public SolicitacaoManViaPublicaUpdateDto(String descricao, String comentarios, String bairro, String nomeRua, String status) {
+    public SolicitacaoManViaPublicaUpdateDto(String descricao, String comentarios, String bairro, String nomeRua, SolicitacaoStatusEnum status, PrioridadeEnum prioridade, String dataConcluida) {
         this.descricao = descricao;
         this.comentarios = comentarios;
         this.bairro = bairro;
         this.nomeRua = nomeRua;
         this.status = status;
+        this.prioridade = prioridade;
+        this.dataConcluida = dataConcluida;
     }
 
     public SolicitacaoManViaPublicaUpdateDto() {
@@ -53,11 +58,27 @@ public class SolicitacaoManViaPublicaUpdateDto {
         this.nomeRua = nomeRua;
     }
 
-    public void setStatus(String status){
+    public void setStatus(SolicitacaoStatusEnum status) {
         this.status = status;
     }
 
-    public String getStatus() {
+    public PrioridadeEnum getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(PrioridadeEnum prioridade) {
+        this.prioridade = prioridade;
+    }
+
+    public String getDataConcluida() {
+        return dataConcluida;
+    }
+
+    public void setDataConcluida(String dataConcluida) {
+        this.dataConcluida = dataConcluida;
+    }
+
+    public SolicitacaoStatusEnum getStatus() {
         return status;
     }
 }

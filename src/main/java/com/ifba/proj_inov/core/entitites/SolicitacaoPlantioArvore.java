@@ -6,6 +6,8 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 
+import java.util.List;
+
 @Entity
 @DiscriminatorValue("SolicitacaoPlantioArvore")
 public class SolicitacaoPlantioArvore extends Solicitacao {
@@ -33,8 +35,8 @@ public class SolicitacaoPlantioArvore extends Solicitacao {
         this.numCasa = numCasa;
     }
 
-    public SolicitacaoPlantioArvore(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, String nomeRua, String bairro, String nomeArvore, String numCasa) {
-        super(id, descricao, dataCriada, status, solicitante, comentarios);
+    public SolicitacaoPlantioArvore(Long id, String descricao, String dataCriada, String dataConcluida, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, List<Double> notas, String nomeRua, String bairro, String nomeArvore, String numCasa) {
+        super(id, descricao, dataCriada, dataConcluida, status, solicitante, comentarios, notas);
         this.nomeRua = nomeRua;
         this.bairro = bairro;
         this.nomeArvore = nomeArvore;

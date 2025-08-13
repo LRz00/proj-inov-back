@@ -4,6 +4,7 @@ import com.ifba.proj_inov.core.entitites.enums.SolicitacaoStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("SolicitacaoCapinacao")
@@ -20,17 +21,17 @@ public class SolicitacaoCapinacao extends Solicitacao {
         this.nomeRua = nomeRua;
     }
 
-    public SolicitacaoCapinacao(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios, String bairro, String nomeRua) {
-        super(id, descricao, dataCriada, status, solicitante, comentarios);
-        this.bairro = bairro;
-        this.nomeRua = nomeRua;
-    }
+   public SolicitacaoCapinacao(Long id, String descricao, String dataCriada, String dataConcluida,
+                            SolicitacaoStatusEnum status, Usuario solicitante, 
+                            String comentarios, List<Double> notas,
+                            String bairro, String nomeRua) {
+    super(id, descricao, dataCriada, dataConcluida, status, solicitante, comentarios, notas);
+    this.bairro = bairro;
+    this.nomeRua = nomeRua;
+}
+
 
     public SolicitacaoCapinacao() {
-    }
-
-    public SolicitacaoCapinacao(Long id, String descricao, String dataCriada, SolicitacaoStatusEnum status, Usuario solicitante, String comentarios) {
-        super(id, descricao, dataCriada, status, solicitante, comentarios);
     }
 
     public String getBairro() {
