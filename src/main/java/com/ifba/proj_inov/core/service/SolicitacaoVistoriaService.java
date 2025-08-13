@@ -62,6 +62,10 @@ public class SolicitacaoVistoriaService {
             entity.setDescricao(dto.getDescricao());
         }
 
+        if (dto.getComentarios() != null) {
+            entity.setComentarios(dto.getComentarios());
+        }
+
         entity = this.repository.save(entity);
 
         return getSolicitacaoVistoriaResponseDto(entity);

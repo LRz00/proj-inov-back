@@ -62,6 +62,10 @@ public class SolicitacaoEnterroAberturaCovaService {
             entity.setDescricao(dto.getDescricao());
         }
 
+        if (dto.getComentarios() != null) {
+            entity.setComentarios(dto.getComentarios());
+        }
+
         entity = this.repository.save(entity);
 
         return getSolicitacaoEnterroAberturaCovaResponseDto(entity);
@@ -84,5 +88,6 @@ public class SolicitacaoEnterroAberturaCovaService {
         responseDto.setNumCasa(entity.getNumCasa());
         return responseDto;
     }
+
 }
 
