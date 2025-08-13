@@ -6,7 +6,6 @@ import com.ifba.proj_inov.api.dto.SolicitacaoCapinacaoResponseDto;
 import com.ifba.proj_inov.api.dto.SolicitacaoCapinacaoUpdateDto;
 import com.ifba.proj_inov.core.entitites.SolicitacaoCapinacao;
 import com.ifba.proj_inov.core.repository.SolicitacaoCapinacaoRepository;
-import com.ifba.proj_inov.core.repository.SolicitacaoCapinacaoRepository;
 import com.ifba.proj_inov.core.repository.projection.SolicitacaoCapinacaoProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
